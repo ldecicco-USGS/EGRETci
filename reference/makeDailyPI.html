@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Single confidence interval bootstrap run — bootAnnual • EGRETci</title>
+<title>Make Daily Prediction Intervals — makeDailyPI • EGRETci</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Single confidence interval bootstrap run — bootAnnual" />
-<meta property="og:description" content="One bootstrap run used in calculating confidence interval bands." />
+<meta property="og:title" content="Make Daily Prediction Intervals — makeDailyPI" />
+<meta property="og:description" content="This function takes the output from genDailyBoot and 
+calculates the quantiles for a daily aggregation." />
 
 
 
@@ -129,61 +130,80 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Single confidence interval bootstrap run</h1>
-    <small class="dont-index">Source: <a href='https://github.com/USGS-R/EGRETci/blob/master/R/plotCIs.R'><code>R/plotCIs.R</code></a></small>
-    <div class="hidden name"><code>bootAnnual.Rd</code></div>
+    <h1>Make Daily Prediction Intervals</h1>
+    <small class="dont-index">Source: <a href='https://github.com/USGS-R/EGRETci/blob/master/R/predictionIntervals.R'><code>R/predictionIntervals.R</code></a></small>
+    <div class="hidden name"><code>makeDailyPI.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>One bootstrap run used in calculating confidence interval bands.</p>
+    <p>This function takes the output from <code><a href='genDailyBoot.html'>genDailyBoot</a></code> and 
+calculates the quantiles for a daily aggregation.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bootAnnual</span><span class='op'>(</span><span class='va'>eList</span>, blockLength <span class='op'>=</span> <span class='fl'>200</span>, startSeed <span class='op'>=</span> <span class='fl'>494817</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  jitterOn <span class='op'>=</span> <span class='cn'>FALSE</span>, V <span class='op'>=</span> <span class='fl'>0.2</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>makeDailyPI</span><span class='op'>(</span><span class='va'>dailyBootOut</span>, <span class='va'>eList</span>, fluxUnit <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>dailyBootOut</th>
+      <td><p>data frame returned from <code><a href='genDailyBoot.html'>genDailyBoot</a></code></p></td>
+    </tr>
+    <tr>
       <th>eList</th>
-      <td><p>named list with at least the Daily, Sample, and INFO dataframes. Created from the EGRET package, after running <code><a href='https://rdrr.io/pkg/EGRET/man/modelEstimation.html'>modelEstimation</a></code>.</p></td>
+      <td><p>named list with at least the Daily, Sample, and INFO 
+dataframes. Created from the EGRET package, after running <code><a href='https://rdrr.io/pkg/EGRET/man/modelEstimation.html'>modelEstimation</a></code>.</p></td>
     </tr>
     <tr>
-      <th>blockLength</th>
-      <td><p>integer default value is 200.</p></td>
-    </tr>
-    <tr>
-      <th>startSeed</th>
-      <td><p>setSeed value. Defaults to 494817. This is used to make repeatable output.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>logical specifying whether or not to display progress message.</p></td>
-    </tr>
-    <tr>
-      <th>jitterOn</th>
-      <td><p>logical, if TRUE, adds "jitter" to the data in an attempt to avoid some numerical problems.  Default = FALSE.  See Details below.</p></td>
-    </tr>
-    <tr>
-      <th>V</th>
-      <td><p>numeric a multiplier for addition of jitter to the data, default = 0.2.</p></td>
+      <th>fluxUnit</th>
+      <td><p>number representing entry in pre-defined fluxUnit class array. 
+<code><a href='https://rdrr.io/pkg/EGRET/man/printFluxUnitCheatSheet.html'>printFluxUnitCheatSheet</a></code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>In some situations numerical problems are encountered in the bootstrap process, resulting in highly unreasonable spikes in the confidence intervals.
-The use of "jitter" can often prevent these problems, but should only be used when it is clearly needed.
-It adds a small amount of random "jitter" to the explanatory variables of the WRTDS model.  The V parameter sets the scale of variation in the log discharge values.
-The standard deviation of the added jitter is V * standard deviation of Log Q.
-The default for V is 0.2.  Larger values should generally be avoided, and smaller values may be sufficient.</p>
+    <p>a list of 2 data frames, one for average concentration, in mg/L
+and one for flux (unit depends on fluxUnit argument)
+In each data frame the first column is Date. The remaining columns are
+quantiles of the flux or concentration (depending on the data frame).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://pubs.usgs.gov/tm/04/a10/'>EGRET</a></span><span class='op'>)</span>
-<span class='va'>eList</span> <span class='op'>&lt;-</span> <span class='va'>Choptank_eList</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>annualResults</span> <span class='op'>&lt;-</span> <span class='fu'>bootAnnual</span><span class='op'>(</span><span class='va'>eList</span><span class='op'>)</span>
-<span class='op'>}</span>
+    <pre class="examples"><div class='input'><span class='va'>eList</span> <span class='op'>&lt;-</span> <span class='fu'>EGRET</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/EGRET/man/sampleData.html'>Choptank_eList</a></span>
+<span class='co'># This example is only based on 4 iterations</span>
+<span class='co'># Actual prediction intervals should be calculated on</span>
+<span class='co'># a much large set set should be used. </span>
+<span class='va'>dailyBoot</span> <span class='op'>&lt;-</span> <span class='va'>Choptank_dailyBootOut</span>
+<span class='va'>dailyPcts</span> <span class='op'>&lt;-</span> <span class='fu'>makeDailyPI</span><span class='op'>(</span><span class='va'>dailyBoot</span>, <span class='va'>eList</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>dailyPcts</span><span class='op'>[[</span><span class='st'>"flux"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         Date  DecYear        p1      p2.5       p5      p10      p25      p50
+#&gt; 1 1979-10-01 1979.750 108.85328 108.85328 110.7387 117.4744 128.0440 136.3389
+#&gt; 2 1979-10-02 1979.753  99.24955  99.24955 104.9431 119.9514 128.1189 143.2019
+#&gt; 3 1979-10-03 1979.755 122.53540 122.53540 124.0501 131.8080 149.0372 166.6936
+#&gt; 4 1979-10-04 1979.758 155.71447 155.71447 157.5686 163.1568 178.8756 203.0882
+#&gt; 5 1979-10-05 1979.761 150.59668 150.59668 150.6070 160.7641 195.2427 210.0535
+#&gt; 6 1979-10-06 1979.764 121.47619 121.47619 126.5504 141.3553 170.2329 182.8105
+#&gt;        p75      p90      p95    p97.5      p99
+#&gt; 1 146.1200 155.5465 157.3203 157.9757 157.9757
+#&gt; 2 150.6974 163.4249 168.5032 168.9131 168.9131
+#&gt; 3 194.4266 205.3892 213.5120 216.5846 216.5846
+#&gt; 4 222.5818 236.7537 248.6268 252.6469 252.6469
+#&gt; 5 246.5143 268.4792 270.6394 270.7597 270.7597
+#&gt; 6 212.2932 231.9834 261.7761 272.9430 272.9430</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>dailyPcts</span><span class='op'>[[</span><span class='st'>"conc"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         Date  DecYear        p1      p2.5        p5       p10       p25
+#&gt; 1 1979-10-01 1979.750 0.6640612 0.6640612 0.6755632 0.7166547 0.7811343
+#&gt; 2 1979-10-02 1979.753 0.5713623 0.5713623 0.6041392 0.6905393 0.7375578
+#&gt; 3 1979-10-03 1979.755 0.5163346 0.5163346 0.5227170 0.5554072 0.6280067
+#&gt; 4 1979-10-04 1979.758 0.4679845 0.4679845 0.4735570 0.4903516 0.5375929
+#&gt; 5 1979-10-05 1979.761 0.4274588 0.4274588 0.4274880 0.4563184 0.5541836
+#&gt; 6 1979-10-06 1979.764 0.4393940 0.4393940 0.4577480 0.5112991 0.6157527
+#&gt;         p50       p75       p90       p95     p97.5       p99
+#&gt; 1 0.8317377 0.8914077 0.9489137 0.9597352 0.9637333 0.9637333
+#&gt; 2 0.8243882 0.8675388 0.9408086 0.9700432 0.9724031 0.9724031
+#&gt; 3 0.7024065 0.8192667 0.8654604 0.8996881 0.9126353 0.9126353
+#&gt; 4 0.6103617 0.6689477 0.7115400 0.7472232 0.7593053 0.7593053
+#&gt; 5 0.5962231 0.6997147 0.7620608 0.7681922 0.7685336 0.7685336
+#&gt; 6 0.6612476 0.7678900 0.8391119 0.9468756 0.9872676 0.9872676</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

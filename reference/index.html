@@ -44,6 +44,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -54,10 +56,26 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-53797708-7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-53797708-7');
+</script>
+
+
+  
+
+  
 
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -78,34 +96,22 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
+  <a href="../articles/EGRETci.html">Introduction</a>
 </li>
 <li>
-  <a href="../articles/EGRETci.html">Get started</a>
+  <a href="../reference/index.html">Function Help Pages</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/Enhancements.html">Enhancements</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/Enhancements.html">Guide to EGRETci 2.0 enhancements</a>
-    </li>
-  </ul>
+<li>
+  <a href="../articles/prediction.html">WRTDS Kalman Prediction Intervals</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/USGS-R/EGRETci/">
-    <span class="fab fa-github fa-lg"></span>
+  <a href="https://github.com/USGS-R/EGRETci">
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -148,6 +154,15 @@
       <tr>
         
         <td>
+          <p><code><a href="EGRETci-package.html">EGRETci-package</a></code> </p>
+        </td>
+        <td><p>EGRETci package for bootstrap hypothesis tests and confidence interval analysis for WRTDS (Weighted 
+Regressions on Time, Discharge, and Season) statistical models. This 
+package is designed to be used in conjunction with the EGRET package, 
+which estimates and describes WRTDS models.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="blockSample.html">blockSample()</a></code> </p>
         </td>
         <td><p>blockSample</p></td>
@@ -172,15 +187,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="EGRETci-package.html">EGRETci-package</a></code> </p>
-        </td>
-        <td><p>EGRETci package for bootstrap hypothesis tests and confidence interval analysis for WRTDS (Weighted 
-Regressions on Time, Discharge, and Season) statistical models. This 
-package is designed to be used in conjunction with the EGRET package, 
-which estimates and describes WRTDS models.</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="example_data.html">Choptank_eBoot</a></code> </p>
         </td>
         <td><p>Example eBoot</p></td>
@@ -193,15 +199,33 @@ which estimates and describes WRTDS models.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="makeMonths.html">makeMonths()</a></code> </p>
+          <p><code><a href="makeAnnualPI.html">makeAnnualPI()</a></code> </p>
         </td>
-        <td><p>make Months</p></td>
+        <td><p>Make Annual Prediction Intervals</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="makeDailyPI.html">makeDailyPI()</a></code> </p>
+        </td>
+        <td><p>Make Daily Prediction Intervals</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="makeMonthPI.html">makeMonthPI()</a></code> </p>
+        </td>
+        <td><p>Make Monthly Prediction Intervals</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="monthSeqToDec.html">monthSeqToDec()</a></code> </p>
         </td>
         <td><p>monthSeqToDec</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="pVal.html">pVal()</a></code> </p>
+        </td>
+        <td><p>pVal</p></td>
       </tr><tr>
         
         <td>
@@ -221,12 +245,6 @@ and confidence bands for flow normalized concentrations</p></td>
           <p><code><a href="plotHistogramTrend.html">plotHistogramTrend()</a></code> </p>
         </td>
         <td><p>plotHistogramTrend</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pVal.html">pVal()</a></code> </p>
-        </td>
-        <td><p>pVal</p></td>
       </tr><tr>
         
         <td>
@@ -278,11 +296,11 @@ and confidence bands for flow normalized concentrations</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Laura DeCicco, Robert Hirsch.</p>
+  <p><p>Developed by Laura DeCicco, Robert Hirsch.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
 </div>
 
       </footer>
@@ -290,6 +308,8 @@ and confidence bands for flow normalized concentrations</p></td>
 
   
 
+
+  
 
   </body>
 </html>
