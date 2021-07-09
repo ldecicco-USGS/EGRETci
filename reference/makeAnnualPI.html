@@ -78,9 +78,6 @@ This means that the function can be used for seasons." />
 </script>
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -125,7 +122,7 @@ This means that the function can be used for seasons." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/USGS-R/EGRETci">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -153,7 +150,7 @@ calculates the quantiles for an annual (based on paStart/paLong) aggregation.
 This means that the function can be used for seasons.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>makeAnnualPI</span><span class='op'>(</span><span class='va'>dailyBootOut</span>, <span class='va'>eList</span>, paLong <span class='op'>=</span> <span class='fl'>12</span>, paStart <span class='op'>=</span> <span class='fl'>10</span>, fluxUnit <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>makeAnnualPI</span><span class='op'>(</span><span class='va'>dailyBootOut</span>, <span class='va'>eList</span>, paLong <span class='op'>=</span> <span class='fl'>12</span>, paStart <span class='op'>=</span> <span class='fl'>10</span>, fluxUnit <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -190,42 +187,44 @@ In each data frame the first column is DecYear. The remaining columns are
 quantiles of the flux or concentration (depending on the data frame).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>eList</span> <span class='op'>&lt;-</span> <span class='fu'>EGRET</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/EGRET/man/sampleData.html'>Choptank_eList</a></span>
-<span class='co'># This example is only based on 4 iterations</span>
-<span class='co'># Actual prediction intervals should be calculated on</span>
-<span class='co'># a much larger number of iterations (several hundred).  </span>
-<span class='va'>dailyBoot</span> <span class='op'>&lt;-</span> <span class='va'>Choptank_dailyBootOut</span>
-<span class='va'>annualPcts</span> <span class='op'>&lt;-</span> <span class='fu'>makeAnnualPI</span><span class='op'>(</span><span class='va'>dailyBoot</span>, <span class='va'>eList</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>annualPcts</span><span class='op'>[[</span><span class='st'>"flux"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    DecYear       p1     p2.5       p5      p10      p25      p50      p75
-#&gt; 1 1980.249 300.2398 300.2398 301.8455 307.1477 309.4482 317.7999 330.2232
-#&gt; 2 1981.249 153.7898 153.7898 153.9703 158.7941 164.4680 168.8981 175.3665
-#&gt; 3 1982.249 262.1990 262.1990 263.3815 268.0285 274.5739 288.0483 296.1632
-#&gt; 4 1983.249 323.4122 323.4122 324.8703 332.7810 351.4329 360.9021 369.6140
-#&gt; 5 1984.249 387.9003 387.9003 396.3133 417.9942 426.2565 434.0034 446.7875
-#&gt; 6 1985.249 120.6924 120.6924 120.9460 122.3459 123.9973 126.8312 131.8363
-#&gt;        p90      p95    p97.5      p99
-#&gt; 1 347.9412 353.3627 354.7580 354.7580
-#&gt; 2 179.5756 181.7312 182.0641 182.0641
-#&gt; 3 304.9160 307.9942 308.3691 308.3691
-#&gt; 4 385.3095 393.8460 394.9293 394.9293
-#&gt; 5 458.4162 461.3039 461.9950 461.9950
-#&gt; 6 136.5073 139.2032 139.6815 139.6815</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>annualPcts</span><span class='op'>[[</span><span class='st'>"conc"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    DecYear        p1      p2.5        p5       p10       p25       p50
-#&gt; 1 1980.249 0.8943015 0.8943015 0.9002018 0.9160820 0.9359561 0.9669431
-#&gt; 2 1981.249 0.9118777 0.9118777 0.9142081 0.9255707 0.9462244 0.9693073
-#&gt; 3 1982.249 1.0132666 1.0132666 1.0154235 1.0225617 1.0430828 1.0774149
-#&gt; 4 1983.249 0.9298767 0.9298767 0.9345345 0.9510482 0.9844741 1.0125638
-#&gt; 5 1984.249 0.9474285 0.9474285 0.9475826 0.9493554 0.9627001 0.9869344
-#&gt; 6 1985.249 0.9712238 0.9712238 0.9737614 0.9810472 0.9995361 1.0212897
-#&gt;         p75      p90      p95    p97.5      p99
-#&gt; 1 0.9980734 1.048386 1.075781 1.085602 1.085602
-#&gt; 2 1.0075477 1.028927 1.041497 1.042789 1.042789
-#&gt; 3 1.1230733 1.138615 1.142896 1.143837 1.143837
-#&gt; 4 1.0489304 1.081274 1.083430 1.083898 1.083898
-#&gt; 5 1.0215825 1.039515 1.042340 1.043366 1.043366
-#&gt; 6 1.0640089 1.101643 1.115537 1.120401 1.120401</div><div class='input'>
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>eList</span> <span class='op'>&lt;-</span> <span class='fu'>EGRET</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/EGRET/man/sampleData.html'>Choptank_eList</a></span></span>
+<span class='r-in'><span class='co'># This example is only based on 4 iterations</span></span>
+<span class='r-in'><span class='co'># Actual prediction intervals should be calculated on</span></span>
+<span class='r-in'><span class='co'># a much larger number of iterations (several hundred).  </span></span>
+<span class='r-in'><span class='va'>dailyBoot</span> <span class='op'>&lt;-</span> <span class='va'>Choptank_dailyBootOut</span></span>
+<span class='r-in'><span class='va'>annualPcts</span> <span class='op'>&lt;-</span> <span class='fu'>makeAnnualPI</span><span class='op'>(</span><span class='va'>dailyBoot</span>, <span class='va'>eList</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>annualPcts</span><span class='op'>[[</span><span class='st'>"flux"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    DecYear       p1     p2.5       p5      p10      p25      p50      p75</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 1980.249 300.2398 300.2398 301.8455 307.1477 309.4482 317.7999 330.2232</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 1981.249 153.7898 153.7898 153.9703 158.7941 164.4680 168.8981 175.3665</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 1982.249 262.1990 262.1990 263.3815 268.0285 274.5739 288.0483 296.1632</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 1983.249 323.4122 323.4122 324.8703 332.7810 351.4329 360.9021 369.6140</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 1984.249 387.9003 387.9003 396.3133 417.9942 426.2565 434.0034 446.7875</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 1985.249 120.6924 120.6924 120.9460 122.3459 123.9973 126.8312 131.8363</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        p90      p95    p97.5      p99</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 347.9412 353.3627 354.7580 354.7580</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 179.5756 181.7312 182.0641 182.0641</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 304.9160 307.9942 308.3691 308.3691</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 385.3095 393.8460 394.9293 394.9293</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 458.4162 461.3039 461.9950 461.9950</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 136.5073 139.2032 139.6815 139.6815</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>annualPcts</span><span class='op'>[[</span><span class='st'>"conc"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    DecYear        p1      p2.5        p5       p10       p25       p50</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 1980.249 0.8943015 0.8943015 0.9002018 0.9160820 0.9359561 0.9669431</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 1981.249 0.9118777 0.9118777 0.9142081 0.9255707 0.9462244 0.9693073</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 1982.249 1.0132666 1.0132666 1.0154235 1.0225617 1.0430828 1.0774149</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 1983.249 0.9298767 0.9298767 0.9345345 0.9510482 0.9844741 1.0125638</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 1984.249 0.9474285 0.9474285 0.9475826 0.9493554 0.9627001 0.9869344</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 1985.249 0.9712238 0.9712238 0.9737614 0.9810472 0.9995361 1.0212897</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         p75      p90      p95    p97.5      p99</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 0.9980734 1.048386 1.075781 1.085602 1.085602</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 1.0075477 1.028927 1.041497 1.042789 1.042789</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 1.1230733 1.138615 1.142896 1.143837 1.143837</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 1.0489304 1.081274 1.083430 1.083898 1.083898</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 1.0215825 1.039515 1.042340 1.043366 1.043366</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 1.0640089 1.101643 1.115537 1.120401 1.120401</span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

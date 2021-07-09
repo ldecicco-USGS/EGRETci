@@ -68,7 +68,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/USGS-R/EGRETci" class="external-link">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -88,7 +88,7 @@
       <h1 data-toc-skip>Introduction to EGRET Confidence Intervals</h1>
                         <h4 data-toc-skip class="author">Robert M. Hirsch, Laura A. De Cicco</h4>
             
-            <h4 data-toc-skip class="date">13 April, 2021</h4>
+            <h4 data-toc-skip class="date">09 July, 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/USGS-R/EGRETci/blob/master/vignettes/EGRETci.Rmd" class="external-link"><code>vignettes/EGRETci.Rmd</code></a></small>
       <div class="hidden name"><code>EGRETci.Rmd</code></div>
@@ -99,7 +99,7 @@
     
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h1>
+<a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h1>
 <p>This package <strong>EGRETci</strong> implements a set of approaches to the analysis of uncertainty associated with WRTDS trend analysis as implemented in the <strong>EGRET</strong> package. The various functions included here are all discussed in the <a href="http://authors.elsevier.com/sd/article/S1364815215300220" class="external-link"><em>A bootstrap method for estimating uncertainty of water quality trends</em> Hirsch, Archfield, and De Cicco, 2015</a></p>
 <p>The <strong>EGRETci</strong> package is designed for interactive or batch use. Instructions for both are included here in the vignette. The package allows users to set the Period of Analysis, and various smoothing parameters for WRTDS. Users should consult the <strong>EGRET</strong> vignette for more background on those issues. For more extensive documentation refer to <a href="http://usgs-r.github.io/EGRETci/" class="external-link">EGRETci</a></p>
 <p>The <strong>EGRETci</strong> package is designed to carry out four types of tasks.</p>
@@ -111,7 +111,7 @@
 </ol>
 <div id="required-data-frames" class="section level2">
 <h2 class="hasAnchor">
-<a href="#required-data-frames" class="anchor"></a>Required Data Frames</h2>
+<a href="#required-data-frames" class="anchor" aria-hidden="true"></a>Required Data Frames</h2>
 <p>The following table provides definitions of the four data frames that constitute the named list <strong>eBoot</strong></p>
 <table class="table">
 <colgroup>
@@ -330,7 +330,7 @@
 </div>
 <div id="wrtds-bootstrap-test" class="section level1">
 <h1 class="hasAnchor">
-<a href="#wrtds-bootstrap-test" class="anchor"></a>WRTDS Bootstrap Test</h1>
+<a href="#wrtds-bootstrap-test" class="anchor" aria-hidden="true"></a>WRTDS Bootstrap Test</h1>
 <p>The WBT (WRTDS Bootstrap Test) can be run interactively or in batch.</p>
 <p>Regardless of which approach is used, if the user wishes to use any non-default values of the parameters for model estimation or period of analysis these need to be set up before running the code. For example:</p>
 <p>If the period of analysis is to be anything other than a Water Year (paStart=10, paLong=12), the user must use the <code>setPA</code> function. For example if we want to do the analysis for the three months starting with April, the command would be <code>eList &lt;- setPA(eList, paStart = 4, paLong = 3)</code>.</p>
@@ -405,7 +405,7 @@ Should we reject Ho that Flow Normalized Flux Trend = 0 ? Reject Ho
 <p>This will result in the creation of the text file called <code>outputText.txt</code>, and an RData file called <code>output.RData</code>. The RData file will contain the objects <code>caseSetUp, bootOut, wordsOut, xConc, xFlux, and INFO</code>. Both files will be located in the working directory.</p>
 <div id="histograms" class="section level2">
 <h2 class="hasAnchor">
-<a href="#histograms" class="anchor"></a>Histograms</h2>
+<a href="#histograms" class="anchor" aria-hidden="true"></a>Histograms</h2>
 <p>The function <code>plotHistogramTrend</code> plots a histogram of all of the trend magnitudes (expressed in percentage change over the selected period) from the full set of replicates created by <code>wBT</code>. These magnitudes are stored in the eBoot list. These histograms serve the purpose of providing a graphical impression of the central tendency and the uncertainty about the size of a trend. They can be used to help answer questions like: “How sure are we that the trend is positive?” or “How sure are we that the decrease is at least a 20% decrease over the period of interest?” The <code>plotHistogramTrend</code> function can produce histograms either for Flow Normalized Concentration or for Flow Normalized Flux.</p>
 <p>When creating a histogram it is important to carefully determine what “bins” to use. In this plot it is a good idea to make sure that the plot covers a range of both negative and positive values even though it might be the case that the entire range of the trend magnitudes is positive (or negative). The function is set up so that it defaults to setting up 10 bins and the bins are set to cover the full range of the magnitudes and at least cover magnitudes as low as -10% and as high as +10%. The bins are set up based on a minimum value (xMin), a maximum value (xMax), and a step size (xStep). The defaults used in an initial run can simply leave out these three arguments and will produce a plot. This first plot would not be suitable for publication or display, but is intended to guide the analyst to set these three arguments to produce a suitable plot.</p>
 <p>Ultimately we want a plot with these characteristics: The value of xStep should be an integer such as 5, 10, or 20 so the width of the bins is 5%, 10% or 20%. xStep should be small enough so that the histogram looks relatively smooth. If it is too small the histogram bars will tend to be irregular. xStep should not be so large that there is poor resolution of the shape of the distribution. If a very smooth histogram is desired then the analyst needs to have run the <code>wBT</code> function with a high number of replicates (say <code>nBoot = 200</code>). The value of xStep should be less than the minimum value observed in the set of bootstrap replicates. xMin should be some negative integer multiple of step size. If no values were negative, then setting it at -1 times xStep would be a good choice. xMax should be larger than the maximum value in the set of bootstrap replicates and should be some positive integer multiple of xStep. If there are no positive values then 1 times xStep would be a good choice.</p>
@@ -463,15 +463,15 @@ Should we reject Ho that Flow Normalized Flux Trend = 0 ? Reject Ho
 </div>
 <div id="confidence-bands" class="section level1">
 <h1 class="hasAnchor">
-<a href="#confidence-bands" class="anchor"></a>Confidence Bands</h1>
+<a href="#confidence-bands" class="anchor" aria-hidden="true"></a>Confidence Bands</h1>
 <div id="introduction-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#introduction-1" class="anchor"></a>Introduction</h2>
+<a href="#introduction-1" class="anchor" aria-hidden="true"></a>Introduction</h2>
 <p>The purpose here is to produce a graphic that looks just like those produced by <code>plotConcHist</code> or <code>plotFluxHist</code> but with the addition of confidence bands around the flow-normalized histories. There are two versions of the workflow for confidence bands, the first just uses a single computer core which means it takes a long time to run (jobs can take an hour or more), but it is simple to run. It uses the function <code>ciCalculations</code> and can be run interactively or in batch. Two scripts for that are provided below. It is best done in the Terminal or some other window, rather than in the console. If run in the console it will make it impossible for other work in R to take place while the job is running. The second way it can be done is using parallel computing in R. A script for that purpose is provided. It does require three extra packages be installed (<strong>foreach</strong>, <strong>doParallel</strong>, and <strong>iterators</strong>). It is also best to run this in the Terminal, because if it is run in the console, no other R work can be done while it is running.</p>
 </div>
 <div id="preliminary-steps" class="section level2">
 <h2 class="hasAnchor">
-<a href="#preliminary-steps" class="anchor"></a>Preliminary Steps</h2>
+<a href="#preliminary-steps" class="anchor" aria-hidden="true"></a>Preliminary Steps</h2>
 <p>Regardless of the approach (single core or parallel) being taken to the computations, the user needs to set up any non-default values of the parameters for model estimation and period of analysis. For example:</p>
 <p>If the period of analysis is to be anything other than a Water Year (paStart=10, paLong=12), the user must use the <code>setPA</code> function. For example if we want to do the analysis for the three months starting with April, the command would be <code>eList &lt;- setPA(eList, paStart = 4, paLong = 3)</code>.</p>
 <p>If the desired value of windowY was 10 rather than the default value of 7, then the command needed would be <code>eList$INFO$windowY &lt;- 10</code>, similar commands can be used for windowQ, windowS, minNumObs, minNumUncen and edgeAdjust (see help page for <code>modelEstimation</code>).</p>
@@ -481,7 +481,7 @@ Should we reject Ho that Flow Normalized Flux Trend = 0 ? Reject Ho
 </div>
 <div id="simple-workflow" class="section level2">
 <h2 class="hasAnchor">
-<a href="#simple-workflow" class="anchor"></a>Simple Workflow</h2>
+<a href="#simple-workflow" class="anchor" aria-hidden="true"></a>Simple Workflow</h2>
 <p>This example workflow assumes that we use the default values for all of the model parameters and PA and uses the example eList provided in the package. Remember, this is a very long-running process:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pubs.usgs.gov/tm/04/a10/" class="external-link">EGRET</a></span><span class="op">)</span>
@@ -499,7 +499,7 @@ Should we reject Ho that Flow Normalized Flux Trend = 0 ? Reject Ho
 </div>
 <div id="parallel-computing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#parallel-computing" class="anchor"></a>Parallel Computing</h2>
+<a href="#parallel-computing" class="anchor" aria-hidden="true"></a>Parallel Computing</h2>
 <p>Taking advantage of the <strong>foreach</strong> package to do parallel computing:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RevolutionAnalytics/foreach" class="external-link">foreach</a></span><span class="op">)</span>
@@ -520,15 +520,15 @@ Should we reject Ho that Flow Normalized Flux Trend = 0 ? Reject Ho
 <span class="va">ciUpper</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">50</span><span class="op">+</span><span class="op">(</span><span class="va">widthCI</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span>
 <span class="va">probs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ciLower</span>,<span class="va">ciUpper</span><span class="op">)</span>
 
-<span class="va">nCores</span> <span class="op">&lt;-</span> <span class="fu">detectCores</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">coreOut</span>
-<span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu">makeCluster</span><span class="op">(</span><span class="va">nCores</span><span class="op">)</span>
+<span class="va">nCores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">coreOut</span>
+<span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="va">nCores</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html" class="external-link">registerDoParallel</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span>
-<span class="va">repAnnual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html" class="external-link">foreach</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">nBoot</span>,.packages<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'EGRETci'</span><span class="op">)</span><span class="op">)</span> <span class="op">%dopar%</span> <span class="op">{</span>
+<span class="va">repAnnual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html" class="external-link">foreach</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">nBoot</span>,.packages<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'EGRETci'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/foreach/man/foreach.html" class="external-link">%dopar%</a></span> <span class="op">{</span>
    <span class="va">annualResults</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bootAnnual.html">bootAnnual</a></span><span class="op">(</span><span class="va">eList</span>, 
                                <span class="va">blockLength</span>,
                                startSeed <span class="op">=</span> <span class="va">n</span><span class="op">)</span>  
 <span class="op">}</span>
-<span class="fu">stopCluster</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span>               
+<span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span>               
 
 <span class="co"># save(repAnnual, file="repAnnual.RData")</span>
 
@@ -537,7 +537,7 @@ Should we reject Ho that Flow Normalized Flux Trend = 0 ? Reject Ho
 </div>
 <div id="ci-result-plots" class="section level2">
 <h2 class="hasAnchor">
-<a href="#ci-result-plots" class="anchor"></a>CI Result Plots</h2>
+<a href="#ci-result-plots" class="anchor" aria-hidden="true"></a>CI Result Plots</h2>
 <p>Regardless of the way that the computations are done the outputs that are needed for the graphics are contained in eList and CIAnnualResults (which in either script will end up in a file called CIAnnualResults.RData). Once that file is loaded the graphics can be produced using the functions <code>plotConcHistBoot</code> and <code>plotFluxHistBoot</code>. Each of these functions only require two arguments (eList and CIAnnualResults). However, the user can specify a number of other arguments. These other arguments are the same ones used in the <code>plotConcHist</code> and <code>plotFluxHist</code> functions in the base <strong>EGRET</strong> package.</p>
 <p>The user can also view a table of the confidence interval values shown in these graphics simply by using the command <code>CIAnnualResults</code> (fluxes will be in units if kg/day).</p>
 <p>Here is a script for producing these graphics, using the example eList and CIAnnualResults data frames included in the package.</p>

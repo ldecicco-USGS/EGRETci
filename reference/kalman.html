@@ -83,9 +83,6 @@ nBoot = 20 and nKalman = 25." />
 </script>
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -130,7 +127,7 @@ nBoot = 20 and nKalman = 25." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/USGS-R/EGRETci">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -163,8 +160,8 @@ process is nBoot * nKalman.  For example we might generate 500 replicates by set
 nBoot = 20 and nKalman = 25.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='kalman.html'>genDailyBoot</a></span><span class='op'>(</span><span class='va'>eList</span>, nBoot <span class='op'>=</span> <span class='fl'>10</span>, nKalman <span class='op'>=</span> <span class='fl'>10</span>, rho <span class='op'>=</span> <span class='fl'>0.9</span>, setSeed <span class='op'>=</span> <span class='cn'>NA</span>,
-  jitterOn <span class='op'>=</span> <span class='cn'>FALSE</span>, V <span class='op'>=</span> <span class='fl'>0.2</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>genDailyBoot</span><span class='op'>(</span><span class='va'>eList</span>, nBoot <span class='op'>=</span> <span class='fl'>10</span>, nKalman <span class='op'>=</span> <span class='fl'>10</span>, rho <span class='op'>=</span> <span class='fl'>0.9</span>, setSeed <span class='op'>=</span> <span class='cn'>NA</span>,
+  jitterOn <span class='op'>=</span> <span class='cn'>FALSE</span>, V <span class='op'>=</span> <span class='fl'>0.2</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -217,16 +214,16 @@ The standard deviation of the added jitter is V * standard deviation of Log Q.
 The default for V is 0.2.  Larger values should generally be avoided, and smaller values may be sufficient.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='va'>eList</span> <span class='op'>&lt;-</span> <span class='fu'>EGRET</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/EGRET/man/sampleData.html'>Choptank_eList</a></span>
-<span class='co'># Very long running function:</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>dailyBootOut</span> <span class='op'>&lt;-</span> <span class='fu'><a href='kalman.html'>genDailyBoot</a></span><span class='op'>(</span><span class='va'>eList</span>,
-                             nBoot <span class='op'>=</span> <span class='fl'>20</span>,
-                             nKalman <span class='op'>=</span> <span class='fl'>25</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'></span>
+<span class='r-in'><span class='va'>eList</span> <span class='op'>&lt;-</span> <span class='fu'>EGRET</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/EGRET/man/sampleData.html'>Choptank_eList</a></span></span>
+<span class='r-in'><span class='co'># Very long running function:</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>dailyBootOut</span> <span class='op'>&lt;-</span> <span class='fu'>genDailyBoot</span><span class='op'>(</span><span class='va'>eList</span>,</span>
+<span class='r-in'>                             nBoot <span class='op'>=</span> <span class='fl'>20</span>,</span>
+<span class='r-in'>                             nKalman <span class='op'>=</span> <span class='fl'>25</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

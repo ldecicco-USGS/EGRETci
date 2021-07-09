@@ -80,9 +80,6 @@ for each of these months." />
 </script>
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -127,7 +124,7 @@ for each of these months." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/USGS-R/EGRETci">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -157,7 +154,7 @@ The results are in the form of quantiles of concentration and of flux
 for each of these months.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>makeMonthPI</span><span class='op'>(</span><span class='va'>dailyBootOut</span>, <span class='va'>eList</span>, fluxUnit <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>makeMonthPI</span><span class='op'>(</span><span class='va'>dailyBootOut</span>, <span class='va'>eList</span>, fluxUnit <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,42 +184,44 @@ in the "MonthSeq" column in the eList$Daily data frame. The remaining columns ar
 quantiles of the flux or concentration (depending on the data frame).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>eList</span> <span class='op'>&lt;-</span> <span class='fu'>EGRET</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/EGRET/man/sampleData.html'>Choptank_eList</a></span>
-<span class='co'># This example is only based on 4 iterations</span>
-<span class='co'># Actual prediction intervals should be calculated on</span>
-<span class='co'># a much larger number of iterations (several hundred). </span>
-<span class='va'>dailyBoot</span> <span class='op'>&lt;-</span> <span class='va'>Choptank_dailyBootOut</span>
-<span class='va'>monthPcts</span> <span class='op'>&lt;-</span> <span class='fu'>makeMonthPI</span><span class='op'>(</span><span class='va'>dailyBoot</span>, <span class='va'>eList</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>monthPcts</span><span class='op'>[[</span><span class='st'>"flux"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   monthSeq  DecYear       p1     p2.5       p5      p10      p25      p50
-#&gt; 1     1558 1979.791 189.3758 189.3758 190.0509 194.0402 203.6860 220.9693
-#&gt; 2     1559 1979.874 274.0057 274.0057 279.5923 292.7802 321.9846 347.7123
-#&gt; 3     1560 1979.958 320.2276 320.2276 322.0916 331.4465 353.6233 371.3428
-#&gt; 4     1561 1980.042 387.0260 387.0260 402.9150 440.1296 479.7443 531.9095
-#&gt; 5     1562 1980.124 222.5161 222.5161 224.2839 237.7090 262.8306 276.7311
-#&gt; 6     1563 1980.206 484.8060 484.8060 488.7506 501.1748 538.7471 567.7995
-#&gt;        p75      p90      p95    p97.5      p99
-#&gt; 1 231.6290 240.7188 250.9379 254.9164 254.9164
-#&gt; 2 383.8867 399.5109 407.4356 408.3045 408.3045
-#&gt; 3 388.5917 433.4687 452.6538 454.5950 454.5950
-#&gt; 4 569.9550 613.1411 637.7940 641.3565 641.3565
-#&gt; 5 297.8663 326.5420 332.9281 333.9185 333.9185
-#&gt; 6 607.0096 650.6549 673.9090 676.1889 676.1889</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>monthPcts</span><span class='op'>[[</span><span class='st'>"conc"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   monthSeq  DecYear        p1      p2.5        p5       p10       p25       p50
-#&gt; 1     1558 1979.791 0.4346988 0.4346988 0.4362485 0.4454055 0.4675470 0.5072194
-#&gt; 2     1559 1979.874 0.6009423 0.6009423 0.6131947 0.6421180 0.7061684 0.7625937
-#&gt; 3     1560 1979.958 1.0577505 1.0577505 1.0639076 1.0948077 1.1680604 1.2265903
-#&gt; 4     1561 1980.042 0.7145444 0.7145444 0.7438794 0.8125865 0.8857250 0.9820346
-#&gt; 5     1562 1980.124 0.9209325 0.9209325 0.9282489 0.9838118 1.0877832 1.1453134
-#&gt; 6     1563 1980.206 0.7474892 0.7474892 0.7535711 0.7727271 0.8306573 0.8754511
-#&gt;         p75       p90       p95     p97.5       p99
-#&gt; 1 0.5316880 0.5525532 0.5760103 0.5851426 0.5851426
-#&gt; 2 0.8419304 0.8761971 0.8935774 0.8954828 0.8954828
-#&gt; 3 1.2835653 1.4317995 1.4951701 1.5015822 1.5015822
-#&gt; 4 1.0522758 1.1320081 1.1775233 1.1841005 1.1841005
-#&gt; 5 1.2327861 1.3514670 1.3778972 1.3819961 1.3819961
-#&gt; 6 0.9359065 1.0032003 1.0390541 1.0425694 1.0425694</div><div class='input'>
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>eList</span> <span class='op'>&lt;-</span> <span class='fu'>EGRET</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/EGRET/man/sampleData.html'>Choptank_eList</a></span></span>
+<span class='r-in'><span class='co'># This example is only based on 4 iterations</span></span>
+<span class='r-in'><span class='co'># Actual prediction intervals should be calculated on</span></span>
+<span class='r-in'><span class='co'># a much larger number of iterations (several hundred). </span></span>
+<span class='r-in'><span class='va'>dailyBoot</span> <span class='op'>&lt;-</span> <span class='va'>Choptank_dailyBootOut</span></span>
+<span class='r-in'><span class='va'>monthPcts</span> <span class='op'>&lt;-</span> <span class='fu'>makeMonthPI</span><span class='op'>(</span><span class='va'>dailyBoot</span>, <span class='va'>eList</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>monthPcts</span><span class='op'>[[</span><span class='st'>"flux"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   monthSeq  DecYear       p1     p2.5       p5      p10      p25      p50</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1     1558 1979.791 189.3758 189.3758 190.0509 194.0402 203.6860 220.9693</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2     1559 1979.874 274.0057 274.0057 279.5923 292.7802 321.9846 347.7123</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3     1560 1979.958 320.2276 320.2276 322.0916 331.4465 353.6233 371.3428</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4     1561 1980.042 387.0260 387.0260 402.9150 440.1296 479.7443 531.9095</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5     1562 1980.124 222.5161 222.5161 224.2839 237.7090 262.8306 276.7311</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6     1563 1980.206 484.8060 484.8060 488.7506 501.1748 538.7471 567.7995</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        p75      p90      p95    p97.5      p99</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 231.6290 240.7188 250.9379 254.9164 254.9164</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 383.8867 399.5109 407.4356 408.3045 408.3045</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 388.5917 433.4687 452.6538 454.5950 454.5950</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 569.9550 613.1411 637.7940 641.3565 641.3565</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 297.8663 326.5420 332.9281 333.9185 333.9185</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 607.0096 650.6549 673.9090 676.1889 676.1889</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>monthPcts</span><span class='op'>[[</span><span class='st'>"conc"</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   monthSeq  DecYear        p1      p2.5        p5       p10       p25       p50</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1     1558 1979.791 0.4346988 0.4346988 0.4362485 0.4454055 0.4675470 0.5072194</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2     1559 1979.874 0.6009423 0.6009423 0.6131947 0.6421180 0.7061684 0.7625937</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3     1560 1979.958 1.0577505 1.0577505 1.0639076 1.0948077 1.1680604 1.2265903</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4     1561 1980.042 0.7145444 0.7145444 0.7438794 0.8125865 0.8857250 0.9820346</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5     1562 1980.124 0.9209325 0.9209325 0.9282489 0.9838118 1.0877832 1.1453134</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6     1563 1980.206 0.7474892 0.7474892 0.7535711 0.7727271 0.8306573 0.8754511</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         p75       p90       p95     p97.5       p99</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 0.5316880 0.5525532 0.5760103 0.5851426 0.5851426</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 0.8419304 0.8761971 0.8935774 0.8954828 0.8954828</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 1.2835653 1.4317995 1.4951701 1.5015822 1.5015822</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 1.0522758 1.1320081 1.1775233 1.1841005 1.1841005</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 1.2327861 1.3514670 1.3778972 1.3819961 1.3819961</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 0.9359065 1.0032003 1.0390541 1.0425694 1.0425694</span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
